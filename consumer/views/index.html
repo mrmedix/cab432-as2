@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="Twitter-Sentiment">
+<head>
+  <title>Twitter-Sentiment Analysis</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <!--<link href="public/css/main.css" rel="stylesheet"/>-->
+
+  <script src="public/js/lib/jquery-3.1.0.min.js" type="text/javascript"></script>
+  <script src="public/js/lib/angular.min.js" type="text/javascript"></script>
+  <script src="http://code.highcharts.com/highcharts.src.js"></script>
+  <script src="https://rawgit.com/pablojim/highcharts-ng/master/dist/highcharts-ng.js"></script>
+
+
+  <script src="public/js/controller.js" type="text/javascript"></script>
+</head>
+<body ng-controller="mainController">
+<div>
+  <h1 align="center">Twitter Sentiment Analysis</h1>
+</div>
+<div ng-init="">
+  <h2 align="center">Trending tweets: #DonaldTrump, #HillaryClinton</h2>
+  <div ng-repeat="trend in content">
+  <p style="display:inline">{{trend.name}}</p>
+  </div>
+<nav class="navbar navbar-default center">
+  <div class="navbar-inner">
+
+    <form class="navbar-form navbar-default center">
+      <div class="form-group">
+        <input type="text" class="form-control" id="twitterHashtag" placeholder="Twitter Hashtag">
+      </div>
+      <button type="submit" class="btn action-button" ng-click="searchTwitter()">Submit</button>
+      <button type="submit" class="btn action-button" ng-click="stopSearch()">Stop</button>
+
+    </form>
+  </div>
+</nav>
+  <div ng-if="tweet">
+    <highchart id="chart1" config="chartConfig"></highchart>
+
+  </div>
+  <div ng-repeat="data in tweet" repeat-twitter-call="RepeaterElement">
+
+  <p>{{data.statusText._}}</p>
+  <p hidden >{{data.Timestamp._}}</p>
+</div>
+</body>
+</html>
